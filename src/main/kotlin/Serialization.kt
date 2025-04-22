@@ -14,15 +14,10 @@ import java.sql.DriverManager
 import org.jetbrains.exposed.sql.*
 import org.slf4j.event.*
 
-fun Application.configureRouting() {
-    install(StatusPages) {
-        exception<Throwable> { call, cause ->
-            call.respondText(text = "500: $cause" , status = HttpStatusCode.InternalServerError)
-        }
-    }
+fun Application.configureSerialization() {
     routing {
-        get("/") {
-            call.respondText("Hello World!")
-        }
+        get("/json/kotlinx-serialization") {
+                call.respond(mapOf("hello" to "world"))
+            }
     }
 }
