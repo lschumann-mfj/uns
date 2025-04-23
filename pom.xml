@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.mfj</groupId>
     <artifactId>uns</artifactId>
-    <version>0.0.1</version>
+    <version>1.0-SNAPSHOT</version>
     <name>uns</name>
     <description>uns</description>
     <properties>
         <kotlin.code.style>official</kotlin.code.style>
         <exposed_version>0.61.0</exposed_version>
         <h2_version>2.3.232</h2_version>
-        <kotlin_version>2.1.10</kotlin_version>
+        <kotlin_version>2.0.0</kotlin_version>
         <ktor_version>3.1.2</ktor_version>
         <logback_version>1.4.14</logback_version>
         <postgres_version>42.7.5</postgres_version>
@@ -40,17 +40,17 @@
         </dependency>
         <dependency>
             <groupId>org.jetbrains.exposed</groupId>
-            <artifactId>exposed-core-jvm</artifactId>
+            <artifactId>exposed-core</artifactId>
             <version>${exposed_version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.exposed</groupId>
-            <artifactId>exposed-jdbc-jvm</artifactId>
+            <artifactId>exposed-jdbc</artifactId>
             <version>${exposed_version}</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
-            <artifactId>h2-jvm</artifactId>
+            <artifactId>h2</artifactId>
             <version>${h2_version}</version>
         </dependency>
         <dependency>
@@ -70,7 +70,7 @@
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
-            <artifactId>postgresql-jvm</artifactId>
+            <artifactId>postgresql</artifactId>
             <version>${postgres_version}</version>
         </dependency>
         <dependency>
