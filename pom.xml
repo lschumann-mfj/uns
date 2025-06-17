@@ -5,111 +5,86 @@
     <groupId>io.mfj</groupId>
     <artifactId>uns</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>uns</name>
-    <description>uns</description>
+    <name>${project.artifactId}</name>
+    <description>UNS</description>
+
+    <developers>
+        <developer>
+            <name>Measures for Justice</name>
+            <email>opensource@measuresforjustice.org</email>
+            <organization>Measures for Justice</organization>
+            <organizationUrl>https://measuresforjustice.org/</organizationUrl>
+        </developer>
+    </developers>
+
     <properties>
-        <kotlin.code.style>official</kotlin.code.style>
-        <exposed_version>0.61.0</exposed_version>
-        <h2_version>2.3.232</h2_version>
-        <kotlin_version>2.0.0</kotlin_version>
-        <ktor_version>3.1.2</ktor_version>
-        <logback_version>1.4.14</logback_version>
-        <postgres_version>42.7.5</postgres_version>
-        <slf4j_version>2.0.9</slf4j_version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <kotlin.version>1.9.25</kotlin.version>
+        <kotlin.compiler.jvmTarget>11</kotlin.compiler.jvmTarget>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <main.class>io.ktor.server.jetty.jakarta.EngineMain</main.class>
     </properties>
     <repositories>
     </repositories>
     <dependencies>
         <dependency>
-            <groupId>io.ktor</groupId>
-            <artifactId>ktor-server-core-jvm</artifactId>
-            <version>${ktor_version}</version>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
         </dependency>
         <dependency>
-            <groupId>io.ktor</groupId>
-            <artifactId>ktor-serialization-kotlinx-json-jvm</artifactId>
-            <version>${ktor_version}</version>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test-junit5</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>io.ktor</groupId>
-            <artifactId>ktor-server-content-negotiation-jvm</artifactId>
-            <version>${ktor_version}</version>
+            <groupId>io.javalin</groupId>
+            <artifactId>javalin</artifactId>
+            <version>6.2.0</version>
         </dependency>
         <dependency>
-            <groupId>org.jetbrains.exposed</groupId>
-            <artifactId>exposed-core</artifactId>
-            <version>${exposed_version}</version>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+            <version>2.15.2</version>
         </dependency>
         <dependency>
-            <groupId>org.jetbrains.exposed</groupId>
-            <artifactId>exposed-jdbc</artifactId>
-            <version>${exposed_version}</version>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>2.15.2</version>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2_version}</version>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.15.2</version>
         </dependency>
         <dependency>
-            <groupId>io.ktor</groupId>
-            <artifactId>ktor-server-host-common-jvm</artifactId>
-            <version>${ktor_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.ktor</groupId>
-            <artifactId>ktor-server-status-pages-jvm</artifactId>
-            <version>${ktor_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.ktor</groupId>
-            <artifactId>ktor-server-call-logging-jvm</artifactId>
-            <version>${ktor_version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.2</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>${postgres_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.ktor</groupId>
-            <artifactId>ktor-server-jetty-jakarta-jvm</artifactId>
-            <version>${ktor_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.ktor</groupId>
-            <artifactId>ktor-server-config-yaml-jvm</artifactId>
-            <version>${ktor_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.ktor</groupId>
-            <artifactId>ktor-server-test-host-jvm</artifactId>
-            <version>${ktor_version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test-junit</artifactId>
-            <version>${kotlin_version}</version>
-            <scope>test</scope>
+            <!-- 42.2.15 and 42.2.16 do NOT work with Aurora serverless postgres -->
+            <version>42.2.14</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-coroutines-debug</artifactId>
             <version>1.6.4</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.mfj</groupId>
+            <artifactId>mfjkext</artifactId>
+            <version>4.0.95</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.12</version>
         </dependency>
     </dependencies>
     <build>
@@ -125,7 +100,7 @@
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <groupId>org.jetbrains.kotlin</groupId>
-                <version>${kotlin_version}</version>
+                <version>${kotlin.version}</version>
                 <configuration>
                     <jvmTarget>1.8</jvmTarget>
                 </configuration>
@@ -189,7 +164,7 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin_version}</version>
+                <version>${kotlin.version}</version>
                 <executions>
                     <execution>
                         <id>compile</id>
@@ -208,7 +183,7 @@
                     <dependency>
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-serialization</artifactId>
-                        <version>${kotlin_version}</version>
+                        <version>${kotlin.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
