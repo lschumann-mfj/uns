@@ -1,13 +1,15 @@
 import io.javalin.Javalin
-import io.mfj.mfjkext.logger
 
+/**
+ * curl http://localhost:8001/events
+ * curl -d '{"agencyID":"ca-yolo-da","status":"broken"}' http://localhost:8001/events
+ */
 object App {
     private const val port = 8001
-    private val log = logger()
 
     @JvmStatic
     fun main(args: Array<String>) {
-        log.debug("Starting application: 127.0.0.1:$port")
+        println("Starting application: localhost:$port/events")
         val app = Javalin.create().start(port)
         val unsEventController = UnsEventController()
         unsEventController.registerRoutes(app)

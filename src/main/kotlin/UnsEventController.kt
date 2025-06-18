@@ -11,7 +11,7 @@ class UnsEventController {
         app.post("/events") { ctx: Context ->
             try {
                 val unsEvent = ctx.bodyAsClass(UnsEvent::class.java)
-                unsEventDao.createCourse(unsEvent)
+                unsEventDao.createEvent(unsEvent)
                 ctx.status(201).result("Event created")
             } catch (e: SQLException) {
                 ctx.status(500).result("Database error")
@@ -22,25 +22,24 @@ class UnsEventController {
         app.get("/events/{id}") { ctx: Context ->
             try {
                 val id = ctx.pathParam("id").toInt()
-                val course = unsEventDao.getCourse(id)
-                if (course != null) {
-                    ctx.json(course)
+                val event = unsEventDao.getEvent(id)
+                if (event != null) {
+                    ctx.json(event)
                 } else {
                     ctx.status(404).result("Event not found")
                 }
             } catch (e: SQLException) {
                 ctx.status(500).result("Database error")
-                println("Database error $e")
+                println("Database error: $e")
             }
         }
 
         app.get("/events") { ctx: Context ->
             try {
-                val courses = unsEventDao.allCours
-                ctx.json(courses)
+                ctx.json(unsEventDao.allEvents)
             } catch (e: SQLException) {
-                println("Database error: $e")
                 ctx.status(500).result("Database error")
+                println("Database error: $e")
             }
         }
 
@@ -49,19 +48,8 @@ class UnsEventController {
                 val id = ctx.pathParam("id").toInt()
                 val unsEvent = ctx.bodyAsClass(UnsEvent::class.java)
                 unsEvent.id = id
-                unsEventDao.updateCourse(unsEvent)
+                unsEventDao.updateEvent(unsEvent)
                 ctx.result("Event updated")
-            } catch (e: SQLException) {
-                ctx.status(500).result("Database error")
-                println("Database error: $e")
-            }
-        }
-
-        app.delete("/events/{id}") { ctx: Context ->
-            try {
-                val id = ctx.pathParam("id").toInt()
-                unsEventDao.deleteCourse(id)
-                ctx.result("Event deleted")
             } catch (e: SQLException) {
                 ctx.status(500).result("Database error")
                 println("Database error: $e")
