@@ -1,8 +1,7 @@
 package model
 
-data class UnsEvent(
-    var id: String = "",
-    var modified: String = "",
+data class UnsStatus(
     var agencyID: String = "",
+    var modified: String = "",
     var status: String = "",
 )
