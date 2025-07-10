@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal D3 Page</title>
+</head>
+<body>
+
+    <p>This is a paragraph before the D3 elements.</p>
+
+    <!-- This is where D3 will create/manipulate content -->
+    <div id="d3-container"></div>
+
+    <!-- Include D3.js library from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+    <script>
+        // Your D3 code goes here
+
+        // Example: Select the body and add a paragraph
+        d3.select("body").append("p").text("Hello D3!");
+
+        // Example: Select the div and add some SVG circles
+        var svg = d3.select("#d3-container")
+            .append("svg")
+            .attr("width", 200)
+            .attr("height", 100);
+
+        svg.append("circle")
+            .attr("cx", 50)
+            .attr("cy", 50)
+            .attr("r", 40)
+            .style("fill", "blue");
+
+        svg.append("circle")
+            .attr("cx", 150)
+            .attr("cy", 50)
+            .attr("r", 40)
+            .style("fill", "red");
+
+    </script>
+
+</body>
+</html>

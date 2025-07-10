@@ -3,8 +3,17 @@ package model
 import App.getConnection
 import java.sql.SQLException
 
-class UnsEventDao {
-    private val tableNameEvent = "events"
+data class UnsEvent(
+    var id: String = "",
+    var modified: String = "",
+    var agencyID: String = "",
+    var status: String = "",
+) {
+    fun toStatus() = UnsStatus(agencyID, modified, status)
+}
+
+object UnsEventDao {
+    private const val tableNameEvent = "events"
     private val createTableEvent = """
         create table $tableNameEvent
         (
@@ -29,6 +38,7 @@ class UnsEventDao {
                 println(stmt)
                 stmt.executeUpdate()
             }
+            UnsStatusDao.upsertStatus(unsEvent.toStatus())
         }
     }
 

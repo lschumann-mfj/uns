@@ -1,8 +1,0 @@
-package model
-
-data class UnsEvent(
-    var id: String = "",
-    var modified: String = "",
-    var agencyID: String = "",
-    var status: String = "",
-)

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+curl -d '{"agencyID":"mi-state-ct","status":"new data"}' http://localhost:8001/events
+sleep $((10 + RANDOM % 10))
+
+curl -d '{"agencyID":"ny-monroe-da","status":"wrangled"}' http://localhost:8001/events
+sleep $((10 + RANDOM % 10))
+
+curl -d '{"agencyID":"la-ebr-da","status":"vault coded"}' http://localhost:8001/events
+sleep $((10 + RANDOM % 10))
+
+curl -d '{"agencyID":"ca-yolo-da","status":"broken"}' http://localhost:8001/events
+sleep $((10 + RANDOM % 10))
+
+curl -d '{"agencyID":"mi-state-ct","status":"wrangled"}' http://localhost:8001/events
+sleep $((10 + RANDOM % 10))
+
+curl -d '{"agencyID":"ny-monroe-da","status":"vault coded"}' http://localhost:8001/events
+sleep $((10 + RANDOM % 10))
+
+curl -d '{"agencyID":"mi-state-ct","status":"vault coded"}' http://localhost:8001/events
+sleep $((10 + RANDOM % 10))
+
+curl -d '{"agencyID":"ny-monroe-da","status":"new data"}' http://localhost:8001/events
+sleep $((10 + RANDOM % 10))
+
+curl -d '{"agencyID":"la-ebr-da","status":"wrangled"}' http://localhost:8001/events
+sleep $((10 + RANDOM % 10))
+
+curl -d '{"agencyID":"ca-yolo-da","status":"new data"}' http://localhost:8001/events
