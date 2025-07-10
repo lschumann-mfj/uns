@@ -13,22 +13,52 @@
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 
     <script>
-        var svg = d3.select("#d3-container")
+        const data = [
+            { agency_id: "mi-state-ct", status: "vault coded" },
+            { agency_id: "ny-monroe-da", status: "new data" },
+            { agency_id: "la-ebr-da", status: "wrangled" },
+            { agency_id: "ca-yolo-da", status: "new data" },
+        ];
+
+        const margin = { top: 20, right: 30, bottom: 40, left: 90 };
+        const width = 600 - margin.left - margin.right;
+        const height = 400 - margin.top - margin.bottom;
+
+        const svg = d3.select("#d3-container")
             .append("svg")
-            .attr("width", 600)
-            .attr("height", 480);
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        svg.append("circle")
-            .attr("cx", 50)
-            .attr("cy", 50)
-            .attr("r", 40)
-            .style("fill", "blue");
 
-        svg.append("circle")
-            .attr("cx", 400)
-            .attr("cy", 50)
-            .attr("r", 40)
-            .style("fill", "red");
+        const x = d3.scaleBand()
+            .domain(data.map(d => d.status))
+            .range([0, width])
+            .padding(0.1);
+
+        const y = d3.scaleBand()
+            .domain(data.map(d => d.agency_id))
+            .range([height, 0])
+            .padding(0.1);
+
+        svg.append("g")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x));
+
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+        svg.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", d => x(d.status))
+            .attr("y", d => y(d.agency_id))
+            .attr("width", x.bandwidth())
+            .attr("height", y.bandwidth())
+            .attr("fill", "steelblue");
     </script>
 </body>
 </html>
