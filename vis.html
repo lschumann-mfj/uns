@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal D3 Page</title>
+    <title>UNS Agency Status</title>
 </head>
 <body>
     <h1>UNS Agency Status</h1>
@@ -31,34 +31,50 @@
             .append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
+        // d3.json("http://localhost:8001/statuses")
+        //     .then(function(data) {
+                console.log(data);
+                const x = d3.scaleBand()
+                    .domain(data.map(d => d.status))
+                    .range([0, width])
+                    .padding(0.1);
 
-        const x = d3.scaleBand()
-            .domain(data.map(d => d.status))
-            .range([0, width])
-            .padding(0.1);
+                const y = d3.scaleBand()
+                    .domain(data.map(d => d.agency_id))
+                    .range([height, 0])
+                    .padding(0.1);
 
-        const y = d3.scaleBand()
-            .domain(data.map(d => d.agency_id))
-            .range([height, 0])
-            .padding(0.1);
+                svg.append("g")
+                    .attr("transform", `translate(0,${height})`)
+                    .call(d3.axisBottom(x));
 
-        svg.append("g")
-            .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(x));
+                svg.append("g")
+                    .call(d3.axisLeft(y));
 
-        svg.append("g")
-            .call(d3.axisLeft(y));
+                var bar = svg.selectAll(".bar")
+                    .data(data)
+                    .enter()
+                    .append("g")
+                    .attr("transform", function(d, i) { return "translate(" + x(d.status) + "," + y(d.agency_id) + ")"; });
 
-        svg.selectAll(".bar")
-            .data(data)
-            .enter()
-            .append("rect")
-            .attr("class", "bar")
-            .attr("x", d => x(d.status))
-            .attr("y", d => y(d.agency_id))
-            .attr("width", x.bandwidth())
-            .attr("height", y.bandwidth())
-            .attr("fill", "steelblue");
+                bar.append("rect")
+                        .attr("class", "bar")
+                        //.attr("x", d => x(d.status))
+                        //.attr("y", d => y(d.agency_id))
+                        .attr("width", x.bandwidth())
+                        .attr("height", y.bandwidth())
+                        .attr("fill", "steelblue");
+                bar.append("text")
+                    .attr("x", d => 10)
+                    .attr("y", d => y.bandwidth()/2)
+                    .attr("dy", ".35em")
+                    .style("font-size", "16px")
+                    .style("fill", "#FFFFFF")
+                    .text(d => d.agency_id);
+            // })
+            // .catch(function(error) {
+            //     console.error("Error loading data:", error);
+            // });
     </script>
 </body>
 </html>
