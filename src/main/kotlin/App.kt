@@ -1,10 +1,6 @@
 import io.javalin.Javalin
 import java.sql.DriverManager
 
-/**
- * curl http://localhost:8001/events
- * curl -d '{"agencyID":"ca-yolo-da","status":"broken"}' http://localhost:8001/events
- */
 object App {
     private const val API_PORT = 8001
     private const val JDBC_URL = "jdbc:postgresql://localhost:8765/postgres"
