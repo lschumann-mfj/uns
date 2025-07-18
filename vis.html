@@ -63,9 +63,11 @@
                         .attr("height", y.bandwidth())
                         .attr("fill", "steelblue");
                 bar.append("text")
-                    .attr("x", 10)
+                    .attr("x", x.bandwidth()/2)
                     .attr("y", y.bandwidth()/2)
+                    .attr("font-family", "sans-serif")
                     .attr("dy", ".35em")
+                    .style("text-anchor", "middle")
                     .style("font-size", "16px")
                     .style("fill", "#FFFFFF")
                     .text(d => d.agency_id);
