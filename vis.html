@@ -20,6 +20,13 @@
             { agency_id: "ca-yolo-da", status: "new data" },
         ];
 
+        const all_statuses = [
+            "new data",
+            "wrangled",
+            "vault coded",
+            "broken",
+        ];
+
         const margin = { top: 20, right: 30, bottom: 40, left: 90 };
         const width = 600 - margin.left - margin.right;
         const height = 400 - margin.top - margin.bottom;
@@ -35,7 +42,8 @@
         //     .then(function(data) {
                 console.log(data);
                 const x = d3.scaleBand()
-                    .domain(data.map(d => d.status))
+                    //.domain(data.map(d => d.status))
+                    .domain(all_statuses)
                     .range([0, width])
                     .padding(0.1);
 
@@ -48,8 +56,8 @@
                     .attr("transform", `translate(0,${height})`)
                     .call(d3.axisBottom(x));
 
-                svg.append("g")
-                    .call(d3.axisLeft(y));
+                //svg.append("g")
+                //    .call(d3.axisLeft(y));
 
                 var bar = svg.selectAll(".bar")
                     .data(data)
